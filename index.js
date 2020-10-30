@@ -1,30 +1,45 @@
-function calculate(Arr) {
-    var Arr = []
-    var operand ('+', '-', '/', '*')
-    //add function to loop thru array 
-    for (let i = 0; i <= Arr.length; i++)
-        //add function to treat string as a number to calculate 
-        //add function  to treat NULL as 0 and use to calculate 
-        //add function/statement to ignore empty value and undefined statement and use remaining value to calculate 
-        //add function/statement to ignore non-numeric values to calculate 
-        //add function statement to return NaN if values do not represent operation
+function isNumericValue(item) {
+    return !isNaN(item) & item !== ''
+}
 
+function isValidItem(item) {
+    const operators = ['+', '-', '*', '/']
+    return isNumericValue(item) || operators.includes(item)
+}
 
-        Let num1 = Arr[1]
-    let num2 = Arr[2]
-
-
-    switch (Arr) {
+function performCalculation(calculationSteps) {
+    switch (calculationSteps[1]) {
         case '+':
-            return num1 + num2;
+            return Number(calculationSteps[0]) + Number(calculationSteps[2])
         case '-':
-            return num1 - num2;
+            return Number(calculationSteps[0]) - Number(calculationSteps[2])
         case '*':
-            return num1 * num2;
+            return Number(calculationSteps[0]) * Number(calculationSteps[2])
         case '/':
-            return num1 / num2;
+            return Number(calculationSteps[0]) / Number(calculationSteps[2])
         default:
-            return "NaN"
+            return NaN
     }
 }
+
+function calculate(incoming) {
+    let calculationSteps = []
+
+    incoming.forEach((item) => {
+        if (isValidItem(item)) {
+            calculationSteps.push(item)
+        }
+    })
+
+    if (calculationSteps.length !== 3) return NaN
+
+
+    return performCalculation(calculationSteps)
+}
+
 module.exports = calculate
+
+
+
+
+
